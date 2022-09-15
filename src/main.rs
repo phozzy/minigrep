@@ -1,10 +1,16 @@
 use std::{env, fs};
 
+fn parse_config(args: &[String]) -> (&str, &str) {
+    let querry = &args[1];
+    let file_path = &args[2];
+
+    (querry, file_path)
+}
+
 fn main() {
     let args: Vec<String> = env::args().collect();
 
-    let querry = &args[1];
-    let file_path = &args[2];
+    let (querry, file_path) = parse_config(&args);
 
     println!("Searching for {}", querry);
     println!("In the file {}", file_path);
