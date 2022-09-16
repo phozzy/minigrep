@@ -6,22 +6,22 @@ struct Config {
 }
 
 impl Config {
-    fn new(args: &[String]) -> Config {
+    fn build(args: &[String]) -> Result<Config, &'static str> {
         if args.len() < 3 {
-            panic!("not enough arguments!");
+            return Err("not enough arguments!");
         }
 
         let querry = args[1].clone();
         let file_path = args[2].clone();
 
-        Config { querry, file_path }
+        Ok(Config { querry, file_path })
     }
 }
 
 fn main() {
     let args: Vec<String> = env::args().collect();
 
-    let config = Config::new(&args);
+    let config = Config::build(&args);
 
     println!("Searching for {}", config.querry);
     println!("In the file {}", config.file_path);
